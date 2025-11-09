@@ -1,17 +1,13 @@
 plugins {
     id("com.android.application")
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("org.jetbrains.compose")
+    id("app.cash.sqldelight") version "2.0.0"
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "11"
-            }
-        }
-    }
+    android()
 
     sourceSets {
         val commonTest by getting {
@@ -29,11 +25,16 @@ kotlin {
                 implementation(libs.koin.core)
                 //Napier
                 implementation(libs.napier)
+                //SQLDelight
+                implementation("app.cash.sqldelight:runtime:2.0.0")
                 // Ktor
                 implementation("io.ktor:ktor-client-core:2.3.3")
                 implementation("io.ktor:ktor-client-content-negotiation:2.3.3")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.3")
                 implementation("io.ktor:ktor-client-logging:2.3.3")
+
+                //dependencia directa de Kotlin Serialization
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
             }
         }
         val androidMain by getting {
@@ -45,10 +46,14 @@ kotlin {
                 implementation(libs.koin.androidx.compose)
                 //Ktor
                 implementation("io.ktor:ktor-client-okhttp:2.3.3")
+                //SQLDelight
+                implementation("app.cash.sqldelight:android-driver:2.0.0")
             }
         }
     }
 }
+
+
 
 android {
     namespace = "com.example.app_nvidia_kmm"
