@@ -53,6 +53,19 @@ kotlin {
     }
 }
 
+// 🔧 Asegura que Kotlin compile también con JVM 17
+kotlin {
+    jvmToolchain(17)
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.example.app_nvidia_kmm.cache")
+        }
+    }
+}
+
 
 
 android {
@@ -66,8 +79,8 @@ android {
         versionName = "1.0"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     packaging {
         resources {

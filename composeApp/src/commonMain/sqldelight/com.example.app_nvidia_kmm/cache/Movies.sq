@@ -1,0 +1,17 @@
+CREATE TABLE MovieEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT,
+    overview TEXT,
+    posterPath TEXT
+);
+
+selectAll:
+SELECT * FROM MovieEntity;
+
+insertMovie:
+INSERT OR REPLACE INTO MovieEntity(id, title, overview, posterPath)
+VALUES (?, ?, ?, ?);
+
+deleteAll:
+DELETE FROM MovieEntity;
+
